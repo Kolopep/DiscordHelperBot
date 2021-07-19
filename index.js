@@ -21,24 +21,28 @@ const client = new DiscordJS.Client();
         msg.channel.send(embed);
     });*/
     
-    client.on('guildMemberAdd', member =>{
-        member.send('Привет абобус!');
-        member.roles.add("865944974956953620");
-        member.roles.add("865939910673825792");
-        member.roles.add("865939906509144075");
-        member.roles.add("865942191594799164");
-        member.roles.add("865940008665481216");
+
+
+    //ХУЛИ ЭТА ЗАЛУПА НЕ РАБОТАЕТ
+
+    var guildMemberAddRoles = ["865944974956953620", "865939910673825792", "865939906509144075", "865942191594799164", "865940008665481216"];
+
+    client.on('guildMemberAdd',  (member) =>{
+        if(member.user.bot) return;
+        member.send('qq');
+        guildMemberAddRoles.forEach(c=>{
+            member.roles.add(c);
+        });
+        console.log(`Username: ${member.user.username} | UserId ${member.user.id} | Action: GuildMemberAdd`);
     });
     
     
     client.on('messageReactionAdd', async (messageReaction, user) => {
         ReactionAdd(messageReaction, user);
-        console.log(messageReaction);
     });
     
     client.on('messageReactionRemove', async (messageReaction, user) =>{
         ReactionRemove(messageReaction, user);
-        console.log(messageReaction);
     });
     
     
@@ -61,6 +65,7 @@ const client = new DiscordJS.Client();
                 c.messages.fetch(`866090584326668289`).then(msg => msg.react('<:dota2:866035768652857344>'));
                 c.messages.fetch(`866090584326668289`).then(msg => msg.react('<:bob:866033453383155733>'));
             });
+            console.log(`..::${client.user.username} is ready::..`);
         }
     });
     
@@ -68,6 +73,7 @@ const client = new DiscordJS.Client();
     {
         let message = messageReaction.message;
         let guildoff = client.guilds.cache.get(`750746391743037481`);
+        if(user === client.user) return;
         if(message.guild.id != guildoff.id) return;
         if(message.channel.id != "855558717586800670") return;
         if(message.id != "866090584326668289") return;
@@ -77,6 +83,7 @@ const client = new DiscordJS.Client();
         {
             let member = guildoff.members.cache.get(user.id);
             member.roles.add(roleId);
+            console.log(`Username: ${member.user.username} | UserId: ${member.user.id} | Role: ${guildoff.roles.cache.get(roleId).name} | Action: Add Role`);
         }
     }
 
@@ -86,6 +93,7 @@ function ReactionRemove(messageReaction, user)
 {
     let message = messageReaction.message;
     let guildoff = client.guilds.cache.get(`750746391743037481`);
+    if(user === client.user) return;
     if(message.guild.id != guildoff.id) return;
     if(message.channel.id != "855558717586800670") return;
     if(message.id != "866090584326668289") return;
@@ -96,6 +104,7 @@ function ReactionRemove(messageReaction, user)
         {
             let member = guildoff.members.cache.get(user.id);
             member.roles.remove(roleId);
+            console.log(`Username: ${member.user.username} | UserId: ${member.user.id} | Role: ${guildoff.roles.cache.get(roleId).name} | Action: Remove Role`);
         }
     }
 }
