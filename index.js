@@ -5,21 +5,52 @@ const client = new DiscordJS.Client();
 
 
 
+const rolePickEmbed = new DiscordJS.MessageEmbed()
+.setTitle('Роли')
+.setDescription('Тут вы можете получить роли ')
+.addFields(
+    {name: 'Гендерные роли', value: `Мужицкая - <:male:866036740660527164> \nБабская - <:female:866036479473745922>`},
+    {name: 'Игровые роли', value: 'CS:GO - <:csgo:866035185543544882>\nDota2 - <:dota2:866035768652857344>'},
+    {name: 'Other', value: 'Роль абобы - <:bob:866033453383155733>'}
+);
 
-/*client.on('message', (msg) =>{
-    const embed = new DiscordJS.MessageEmbed()
-    .setTitle('Роли')
-    .setDescription('Тут вы можете получить роли ')
-    .addFields(
-        {name: 'Гендерные роли', value: `Мужицкая - <:male:866036740660527164> \nБабская - <:female:866036479473745922>`},
-        {name: 'Игровые роли', value: 'CS:GO - <:csgo:866035185543544882>\nDota2 - <:dota2:866035768652857344>'},
-        {name: 'Other', value: 'Роль абобы - <:bob:866033453383155733>'}
-        );
-        
-        
-        if(msg.content === 'ping')
-        msg.channel.send(embed);
-    });*/
+
+
+const subPickEmbed = new DiscordJS.MessageEmbed()
+.setTitle('Подписки')
+.setDescription('Вы можете подписаться на интересующие вас каналы')
+.addField(
+    {name: 'Test', value: 'test'}
+);
+
+
+
+
+client.on('message', (msg) =>{
+
+        if(msg.content === '!pickRoleEmbed')
+        {
+            if(msg.member.id !== "295879696543907850")
+            {
+                msg.channel.send("Ты шо ахуел команды овнера юзать?");
+            }
+            else
+            {
+                msg.channel.send(rolePickEmbed);
+            }
+        }
+        if(msg.content === "!pickSubEmbed")
+        {
+            if(msg.member.id !== "295879696543907850")
+            {
+                msg.channel.send("Ты шо ахуел команды овнера юзать?");
+            }
+            else
+            {
+                msg.channel.send(subPickEmbed);
+            }
+        }
+    });
     
 
 
@@ -55,6 +86,7 @@ const client = new DiscordJS.Client();
 
     client.on('ready', async() => {
         const channel = client.channels.cache.get(`855558717586800670`);
+        let temp = false;
         if(channel)
         {
             const fetchedChannels = [channel];
@@ -65,8 +97,10 @@ const client = new DiscordJS.Client();
                 c.messages.fetch(`866090584326668289`).then(msg => msg.react('<:dota2:866035768652857344>'));
                 c.messages.fetch(`866090584326668289`).then(msg => msg.react('<:bob:866033453383155733>'));
             });
-            console.log(`..::${client.user.username} is ready::..`);
+            temp = true;
         }
+        client.user.setActivity("SpaceX invite link: https://discord.gg/kGnebHEyvv", {type: "PLAYING"});
+        console.log(`..::${client.user.username} is ready::..\nmessage react: ${temp}`);
     });
     
     function ReactionAdd(messageReaction, user)
@@ -78,14 +112,14 @@ const client = new DiscordJS.Client();
         if(message.channel.id != "855558717586800670") return;
         if(message.id != "866090584326668289") return;
         for(var [emojiId, roleId] of roles)
-    {
-        if(messageReaction.emoji.id === emojiId)
         {
-            let member = guildoff.members.cache.get(user.id);
-            member.roles.add(roleId);
-            console.log(`Username: ${member.user.username} | UserId: ${member.user.id} | Role: ${guildoff.roles.cache.get(roleId).name} | Action: Add Role`);
+            if(messageReaction.emoji.id === emojiId)
+            {
+                let member = guildoff.members.cache.get(user.id);
+                member.roles.add(roleId);
+                console.log(`Username: ${member.user.username} | UserId: ${member.user.id} | Role: ${guildoff.roles.cache.get(roleId).name} | Action: Add Role`);
+            }
         }
-    }
 
 };
 
