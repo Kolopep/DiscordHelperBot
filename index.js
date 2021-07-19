@@ -23,7 +23,6 @@ const client = new DiscordJS.Client();
     
     client.on('guildMemberAdd', member =>{
         member.send('Привет абобус!');
-        member.
         member.roles.add("865944974956953620");
         member.roles.add("865939910673825792");
         member.roles.add("865939906509144075");
