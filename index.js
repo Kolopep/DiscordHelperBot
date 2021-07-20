@@ -143,28 +143,4 @@ function ReactionRemove(messageReaction, user)
 }
 
 
-var rpc = require("discord-rpc")
-
-const RichPresence = new rpc.Client({ transport: 'ipc' })
-
-RichPresence.on('ready', () => {
-
-	RichPresence.request('SET_ACTIVITY', {
-		pid: process.pid,
-		activity : {
-			details : "SpaceX",
-			assets : {
-				large_image : "bad_girl",
-				large_text : "tati"
-			},
-			buttons : [{label : "SpaceX Invite Link" , url : "https://discord.gg/ZffbQEm7pQ"}]
-		}
-	});
-
-
-});
-
-console.log('ready');
-RichPresence.login({ clientId : "865993004892553226" }).catch(console.error);
-
 client.login(process.env.TOKEN);
