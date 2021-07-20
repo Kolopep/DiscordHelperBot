@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Kolopep/DiscordHelperBot#readme",
   "dependencies": {
+    "discord-rpc": "^4.0.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0"
   }
