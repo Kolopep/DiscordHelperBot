@@ -99,7 +99,6 @@ client.on('message', (msg) =>{
             });
             temp = true;
         }
-        client.user.setActivity("SpaceX invite link: https://discord.gg/kGnebHEyvv", {type: "PLAYING"});
         console.log(`..::${client.user.username} is ready::..\nmessage react: ${temp}`);
     });
     
