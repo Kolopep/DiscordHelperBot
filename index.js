@@ -1,5 +1,22 @@
 const DiscordJS = require('discord.js');
-require('dotenv').config()
+const {Client} = require('pg');
+require('dotenv').config();
+
+
+
+const clientdb = new Client({connectionString: process.env.DATABASE_URL,
+ssl: {
+    rejectUnauthorized: false
+}
+});
+
+clientdb.connect();
+
+clientdb.query("INSERT INTO User (Id, UsernameTag) VALUES (0, 'Kolopup#4627')"), (err, res)=>{
+    console.log(err, res);
+    clientdb.end();
+};
+
 
 const client = new DiscordJS.Client();
 
@@ -26,7 +43,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
 
 
 
-client.on('message', (msg) =>{
+    client.on('message', (msg) =>{
 
         if(msg.content === '!pickRoleEmbed')
         {
@@ -50,6 +67,12 @@ client.on('message', (msg) =>{
                 msg.channel.send(subPickEmbed);
             }
         }
+        if(msg.member.joinedAt > new Date('August 8, 2021 20:24:00') && msg.member.joinedAt < new Date('August 8, 2021 20:42:00'))
+        {
+            console.log(`${msg.content} сообщение удалено`);
+            msg.delete();
+        }
+        console.log(`${msg.member.user.username}: ${msg.content} `);
     });
     
 
