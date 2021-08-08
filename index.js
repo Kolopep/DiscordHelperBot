@@ -67,8 +67,8 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
                 msg.channel.send(subPickEmbed);
             }
         }
-        let date = new Date(2021, 7, 8, 20, 38)
-        if(msg.member.joinedAt > date && msg.member.joinedAt < new Date(2021, 7, 8, 20, 43))
+        let date = new Date(2021, 7, 8, 17, 38)
+        if(msg.member.joinedAt > date && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
         {
             console.log(`${msg.content} сообщение удалено`);
             msg.delete();
