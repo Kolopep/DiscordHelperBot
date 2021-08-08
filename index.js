@@ -76,12 +76,12 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
                 console.log(`${msg.content} сообщение удалено`);
                 msg.delete();
             }
+            console.log(`Joined at: ${msg.member.joinedAt} User: ${msg.member.user.username}: ${msg.content} `);
         }
         catch
         {
-            
+
         }
-        console.log(`Joined at: ${msg.member.joinedAt} User: ${msg.member.user.username}: ${msg.content} `);
     });
     
 
