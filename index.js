@@ -68,10 +68,18 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
             }
         }
         let date = new Date(2021, 7, 8, 17, 38)
-        if(msg.member.joinedAt > date && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
+        try
         {
-            console.log(`${msg.content} сообщение удалено`);
-            msg.delete();
+
+            if(msg.member.joinedAt > date && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
+            {
+                console.log(`${msg.content} сообщение удалено`);
+                msg.delete();
+            }
+        }
+        catch
+        {
+            
         }
         console.log(`Joined at: ${msg.member.joinedAt} User: ${msg.member.user.username}: ${msg.content} `);
     });
