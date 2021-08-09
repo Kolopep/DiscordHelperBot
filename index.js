@@ -67,21 +67,13 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
                 msg.channel.send(subPickEmbed);
             }
         }
-        let date = new Date(2021, 7, 8, 17, 38)
-        try
+        let message = `Joined At: ${msg.member.joinedAt} | User: ${msg.member.user.username}${msg.member.user.tag} | Content: ${msg.content} | `;
+        if(msg.member.joinedAt > new Date(2021, 7, 8, 17, 38) && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
         {
-
-            if(msg.member.joinedAt > date && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
-            {
-                console.log(`${msg.content} сообщение удалено`);
-                msg.delete();
-            }
-            console.log(`Joined at: ${msg.member.joinedAt} User: ${msg.member.user.username}: ${msg.content} `);
+            message+=`DELETE`;
+            msg.delete();
         }
-        catch
-        {
-            console.log("Error from ban date");
-        }
+        console.log(message);
     });
     
 
@@ -151,8 +143,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
                 console.log(`Username: ${member.user.username} | UserId: ${member.user.id} | Role: ${guildoff.roles.cache.get(roleId).name} | Action: Add Role`);
             }
         }
-
-};
+    }
 
 function ReactionRemove(messageReaction, user)
 {
