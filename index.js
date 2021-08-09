@@ -71,9 +71,9 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
         if(msg.member.joinedAt > new Date(2021, 7, 8, 17, 38) && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
         {
             message+=`DELETE`;
+            console.log(message);
             msg.delete();
         }
-        console.log(message);
     });
     
 
