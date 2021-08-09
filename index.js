@@ -80,7 +80,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
         }
         catch
         {
-
+            console.log("Error from ban date");
         }
     });
     
