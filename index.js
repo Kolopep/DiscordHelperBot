@@ -1,44 +1,42 @@
 const DiscordJS = require('discord.js');
-const {Client} = require('pg');
 require('dotenv').config();
-
-
-
-const clientdb = new Client({connectionString: process.env.DATABASE_URL,
-ssl: {
-    rejectUnauthorized: false
-}
-});
-
-clientdb.connect();
-
-clientdb.query("INSERT INTO User (Id, UsernameTag) VALUES (0, 'Kolopup#4627')"), (err, res)=>{
-    console.log(err, res);
-    clientdb.end();
-};
+const fs = require('fs');
+const embeds = require("./embeds.js");
 
 
 const client = new DiscordJS.Client();
+client.commands = new DiscordJS.Collection();
+client.events = new DiscordJS.Collection();
 
 
-
-const rolePickEmbed = new DiscordJS.MessageEmbed()
-.setTitle('Роли')
-.setDescription('Тут вы можете получить роли ')
-.addFields(
-    {name: 'Гендерные роли', value: `Мужицкая - <:male:866036740660527164> \nБабская - <:female:866036479473745922>`},
-    {name: 'Игровые роли', value: 'CS:GO - <:csgo:866035185543544882>\nDota2 - <:dota2:866035768652857344>'},
-    {name: 'Other', value: 'Роль абобы - <:bob:866033453383155733>'}
-);
+/*["command_handler", "event_handler"].forEach(handler => {
+    require(`./handlers/${handler}`)(client, DiscordJS);
+})
 
 
+const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
 
-const subPickEmbed = new DiscordJS.MessageEmbed()
-.setTitle('Подписки')
-.setDescription('Вы можете подписаться на интересующие вас каналы')
-.addField(
-    {name: 'Test', value: 'test'}
-);
+for(const file of eventFiles)
+{
+    const event = require(`./events/${file}`);
+    if(event.once) 
+    {
+        client.once(event.name, (...args) => event.execute(...args, client));
+    }
+    else
+    {
+        client.on(event.name, (...args) => event.execute(...args, client));
+    }
+}
+
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}*/
+
 
 
 
@@ -53,7 +51,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
             }
             else
             {
-                msg.channel.send(rolePickEmbed);
+                msg.channel.send();
             }
         }
         if(msg.content === "!pickSubEmbed")
@@ -67,11 +65,20 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
                 msg.channel.send(subPickEmbed);
             }
         }
-        if(msg.member.joinedAt > new Date(2021, 7, 8, 17, 38) && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
+        try
         {
-            console.log(`Joined At: ${msg.member.joinedAt} | User: ${msg.member.user.username}${msg.member.user.tag} | Content: ${msg.content} | DELETE`);
-            msg.delete();
+
+            if(msg.member.joinedAt > new Date(2021, 7, 8, 17, 38) && msg.member.joinedAt < new Date(2021, 7, 8, 17, 43))
+            {
+                console.log(`Joined At: ${msg.member.joinedAt} | User: ${msg.member.user.username}${msg.member.user.tag} | Content: ${msg.content} | DELETE`);
+                msg.delete();
+            }
         }
+        catch
+        {
+            console.log('Error');
+        }
+        
     });
     
 
@@ -105,7 +112,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
     roles.set("866035185543544882", "865939701043298325"); //CS:GO
     roles.set("866035768652857344", "865939830923460629"); //Dota 2
     roles.set("866033453383155733", "866034045933584445"); //Aboba
-
+    /*
     client.on('ready', async() => {
         const channel = client.channels.cache.get(`855558717586800670`);
         let temp = false;
@@ -122,7 +129,7 @@ const subPickEmbed = new DiscordJS.MessageEmbed()
             temp = true;
         }
         console.log(`..::${client.user.username} is ready::..\nmessage react: ${temp}`);
-    });
+    });*/
     
     function ReactionAdd(messageReaction, user)
     {
