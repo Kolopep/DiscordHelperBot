@@ -112,7 +112,6 @@ for (const file of commandFiles) {
     roles.set("866035185543544882", "865939701043298325"); //CS:GO
     roles.set("866035768652857344", "865939830923460629"); //Dota 2
     roles.set("866033453383155733", "866034045933584445"); //Aboba
-    /*
     client.on('ready', async() => {
         const channel = client.channels.cache.get(`855558717586800670`);
         let temp = false;
@@ -129,7 +128,7 @@ for (const file of commandFiles) {
             temp = true;
         }
         console.log(`..::${client.user.username} is ready::..\nmessage react: ${temp}`);
-    });*/
+    });
     
     function ReactionAdd(messageReaction, user)
     {
