@@ -1,3 +1,5 @@
+const antiSpam = require(`./antiSpam.js`);
+
 module.exports = (DiscordJS, client, message) => {
     const prefix = '&';
     if(!message.content.startsWith(prefix) || message.author.bot) return;
@@ -8,7 +10,6 @@ module.exports = (DiscordJS, client, message) => {
     const command = client.commands.get(cmd);
 
     //Anti Spam Protection
-    const antiSpam = require(`./antiSpam.js`);
     antiSpam.execute(DiscordJS, client, message);
 
     if(command)
