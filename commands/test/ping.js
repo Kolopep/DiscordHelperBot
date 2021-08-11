@@ -1,7 +1,7 @@
 module.exports = {
     name: "ping",
     description: "Replies with Pong!",
-    async execute(msg) {
+    async execute(client, msg, args, DiscordJS) {
         msg.channel.send('Pong!');
     }
 }
