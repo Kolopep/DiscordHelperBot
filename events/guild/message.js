@@ -1,6 +1,10 @@
 const antiSpam = require(`../../antiSpam.js`);
 
 module.exports = (DiscordJS, client, message) => {
+    
+    //Anti Spam Protection
+    antiSpam.execute(DiscordJS, client, message);
+    
     const prefix = '&';
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -19,6 +23,4 @@ module.exports = (DiscordJS, client, message) => {
         message.reply("Такой команды нет, а мб баг, похуй");
     }
     
-    //Anti Spam Protection
-    antiSpam.execute(DiscordJS, client, message);
 }
