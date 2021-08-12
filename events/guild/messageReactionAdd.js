@@ -1,6 +1,6 @@
 const fs = require('fs');
 const embeds = require(`../../embeds.js`);
-const rolesjson = require(`../../roles.json`);
+const rolesjson = require(`../../roles.json`).RoleReaction;
 
 var roles = new Map();
 for(var i = 0; i<rolesjson.emojiId.length; i++)
