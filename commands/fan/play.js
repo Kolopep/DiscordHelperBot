@@ -2,9 +2,6 @@ module.exports = {
     name: "play",
     description: "play music from youtube links",
     async execute(client, msg, args, DiscordJS) {
-            const lib = require('lib')({token: process.env.token});
-                    const ytdl = require('ytdl-core');
-            const ytSearch = require('yt-search');
 
             let VOICE_CHANNEL = '000';
 
