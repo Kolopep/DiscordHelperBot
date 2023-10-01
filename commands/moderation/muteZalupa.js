@@ -8,6 +8,12 @@ module.exports = {
         let us = await client.users.fetch("648912421234278401");
         let guildmember = await client.guilds.cache.get(message.guild.id).members.cache.get(us.id);
 
+        
+        if(args[0] != "")
+        {
+            us = await client.users.fetch(args[0].slice(2).slice(0,-1));
+            guildmember = await client.guilds.cache.get(message.guild.id).members.cache.get(us.id);
+        }
 
         console.log(`${guildmember.username}`);
         if(!guildmember.voice.channel) 
