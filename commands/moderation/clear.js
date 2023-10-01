@@ -3,7 +3,7 @@ module.exports = {
     description: "Clear messaged!",
     async execute(client, message, args, DiscordJS) {
         if(message.channel.parent.id === "821771042396962856") return;
-        if(!message.member.permissions.has(DiscordJS.Permissions.FLAGS.MANAGE_MESSAGES)) return message.member.send("Тi чо чмо, Как ти об етой команде узнал?");
+        if(message.member.user.id !== "295879696543907850") return message.member.send("Тi чо чмо, Как ти об етой команде узнал?");
         if(!args[0]) return message.reply("Далбаёб укажи сколько почистить нада");
         if(isNaN(args[0])) return message.reply("Реальную цифру введи банан ёбаный");
 
