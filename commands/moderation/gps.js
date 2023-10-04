@@ -29,6 +29,6 @@ module.exports = {
         console.log(`${guildmember.username}`);
 
         await guildmember.voice.setChannel(channel);
-        message.reply(`убил нефора: <@${guildmember.user.id}> `);
+        message.reply(`телепортировал долбаёба: <@${guildmember.user.id}> в <#${channel.id}>`);
     }
 }
